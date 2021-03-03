@@ -1,73 +1,48 @@
 #pragma once
 #include <iostream>
-#define MAX_ENEMIES 4
 
-enum class EnemyType { ZOMBIE, VAMPIRE, GHOST, WITCH };
-std::string enemyNames[4] = { "Anacleto", "Bonifacio", "Jordi", "Nahuel" };
+#define MAX_ENEMIES 5
+#define MAX_LIFE 200
+#define MAX_NAMES 4
 
-std::string getEnemyTypeString(EnemyType type) {
-	std::string tempstring;
-	switch (type)
-	{
-	case EnemyType::ZOMBIE:
-		tempstring = "ZOMBIE";
-		break;
-	case EnemyType::VAMPIRE:
-		tempstring = "VAMPIRE";
-		break;
-	case EnemyType::GHOST:
-		tempstring = "GHOST";
-		break;
-	case EnemyType::WITCH:
-		tempstring = "WITCH";
-		break;
-	default:
-		break;
-	}
-
-	return tempstring;
-}
+enum class EnemyType 
+{
+	ZOMBIE,
+	VAMPIRE,
+	GHOST,
+	WITCH,
+	COUNT
+};
 
 struct Enemy
 {
 	EnemyType type;
 	std::string name;
 	int health;
+
+	std::string	getEnemyTypeString() const {
+		switch (type)
+		{
+		case EnemyType::ZOMBIE: return "zombie";
+		case EnemyType::VAMPIRE: return "vampire";
+		case EnemyType::GHOST: return "ghost";
+		case EnemyType::WITCH: return "witch";
+		default: return "";
+		}
+	}
 };
 
-//chech if the enemies are the same
-bool equalEnemies(Enemy enemy1, Enemy enemy2) {
-
-	if (enemy1.name == enemy2.name && enemy1.type == enemy2.type)
-		return true;
-	else
-		return false;
-}
-
 Enemy createRandomEnemy() {
+	const std::string NAMES[]{ "Anacleto", "Bonifacio", "Jordi", "Nahuel" };
 
-	int randNum = rand() % (3 - 0 + 1) + 0; //Generate a random number between 2 numbers
-	Enemy randEnemy;
-
-	for (int i = 0; i < sizeof(enemyNames); i++)
-	{
-		if (i == randNum)
-			randEnemy.name = enemyNames[i];
-	}
-
-	randEnemy.health = rand() % (200 - 10 + 1) + 1;
-
-	return randEnemy;
+	return Enemy{
+		EnemyType(rand() % int(EnemyType::COUNT)),
+		NAMES[rand() % MAX_ENEMIES],
+		rand() % MAX_LIFE
+	};
 }
 
-int main() {
-
-	Enemy enemies[MAX_ENEMIES];
-
-	for (int i = 0; i < sizeof(enemies); i++)
-	{
-		enemies[i] = createRandomEnemy();
-	}
-
-	return 0;
+bool operator==(const Enemy& e1, const Enemy& e2) {
+	return e1.name == e2.name && e1.type == e2.type;
 }
+
