@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AA_01-HelloGitHub", "AA_01-
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AA1_02_RandomEnemyGenerator", "AA1_02_RandomEnemyGenerator\AA1_02_RandomEnemyGenerator.vcxproj", "{2FFBCDB3-38A0-4D2D-A7A5-635A0F7FB154}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AA1_03_AGameBoard", "AA1_03_AGameBoard\AA1_03_AGameBoard.vcxproj", "{B6B81C1B-8194-48A6-84CA-00EB87FF6F18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{2FFBCDB3-38A0-4D2D-A7A5-635A0F7FB154}.Release|x64.Build.0 = Release|x64
 		{2FFBCDB3-38A0-4D2D-A7A5-635A0F7FB154}.Release|x86.ActiveCfg = Release|Win32
 		{2FFBCDB3-38A0-4D2D-A7A5-635A0F7FB154}.Release|x86.Build.0 = Release|Win32
+		{B6B81C1B-8194-48A6-84CA-00EB87FF6F18}.Debug|x64.ActiveCfg = Debug|x64
+		{B6B81C1B-8194-48A6-84CA-00EB87FF6F18}.Debug|x64.Build.0 = Debug|x64
+		{B6B81C1B-8194-48A6-84CA-00EB87FF6F18}.Debug|x86.ActiveCfg = Debug|Win32
+		{B6B81C1B-8194-48A6-84CA-00EB87FF6F18}.Debug|x86.Build.0 = Debug|Win32
+		{B6B81C1B-8194-48A6-84CA-00EB87FF6F18}.Release|x64.ActiveCfg = Release|x64
+		{B6B81C1B-8194-48A6-84CA-00EB87FF6F18}.Release|x64.Build.0 = Release|x64
+		{B6B81C1B-8194-48A6-84CA-00EB87FF6F18}.Release|x86.ActiveCfg = Release|Win32
+		{B6B81C1B-8194-48A6-84CA-00EB87FF6F18}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

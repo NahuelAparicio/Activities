@@ -33,11 +33,12 @@ struct Enemy
 };
 
 Enemy createRandomEnemy() {
+
 	const std::string NAMES[]{ "Anacleto", "Bonifacio", "Jordi", "Nahuel" };
 
 	return Enemy{
 		EnemyType(rand() % int(EnemyType::COUNT)),
-		NAMES[rand() % MAX_ENEMIES],
+		NAMES[rand() % MAX_NAMES],
 		rand() % MAX_LIFE
 	};
 }
@@ -45,4 +46,8 @@ Enemy createRandomEnemy() {
 bool operator==(const Enemy& e1, const Enemy& e2) {
 	return e1.name == e2.name && e1.type == e2.type;
 }
+
+
+
+
 
