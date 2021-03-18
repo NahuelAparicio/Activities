@@ -1,2 +1,3 @@
 #pragma once
-#define MAX_BALLS 50
+#define MAXBALLS 50
+#define PANELSIZE 25

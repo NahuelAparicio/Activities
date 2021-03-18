@@ -5,9 +5,8 @@ struct Player
 {
 	//var
 	std::string id;
-	int posX, posY;
+	int **position = new int*[];
 	int score;
-	char gun;
 
 	//pistola?
 
