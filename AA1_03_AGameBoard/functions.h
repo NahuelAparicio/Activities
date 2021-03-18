@@ -1,17 +1,9 @@
 #pragma once
 #include "constants.h"
 
-enum class Movement {
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-	COUNT
-};
+
 
 struct Player {
-
-	
 	int score;
 	int posColX, posRowY;
 
@@ -20,6 +12,8 @@ struct Player {
 		return score++;
 	}
 };
+
+
 
 struct Board {
 
@@ -66,7 +60,7 @@ struct Board {
 	void printBoard(const Player &player) {
 
 			//Fill array borders
-			for (int i = 0; i < NUM_ROWS; i++)
+			/*for (int i = 0; i < NUM_ROWS; i++)
 			{
 				for (int j = 0; j < NUM_COLUMNS; j++)
 				{
@@ -80,19 +74,21 @@ struct Board {
 						board[i][j] = "  ";
 					}
 				}
-			}
-
-			board[player.posRowY][player.posColX] = " P";
+			}*/
+			
+			
 
 			//printArray
 			for (int i = 0; i < NUM_ROWS; i++)
 			{
 				for (int j = 0; j < NUM_COLUMNS; j++)
 				{
-					std::cout << board[i][j];
+					//stones
+					
 				}
 				std::cout << std::endl;
 			}
+			board[player.posRowY][player.posColX] = " P";
 
 	}
 
@@ -102,7 +98,7 @@ struct Board {
 		switch (moveType)
 		{
 		case Movement::UP:
-			if ( board[Y--][X] == "  ") {
+			if ( board[Y--][X] == ".") {
 				Y++;
 				return true;
 			}
@@ -130,22 +126,7 @@ void setPos() {
 
 }
 
-void initializeBoard(Board &board, Player &player) {
-	// random stones 20% 
-	int square = (NUM_COLUMNS - 1) * (NUM_ROWS - 1);
 
-	board.stones = rand() % int(square * 0.2);
-
-	// random coins 30%
-
-	board.coins = rand() % int(square * 0.3);
-
-	// player random 
-	//max NUM_ROW, max NUM_COLUMNS
-	player.posColX = rand() % (NUM_COLUMNS - 1);
-	player.posRowY = rand() % (NUM_ROWS - 1);
-
-}
 
 
 
