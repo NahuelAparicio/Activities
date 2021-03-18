@@ -4,11 +4,13 @@
 struct Panel
 {
 	int size; //tamaño del panel
-	char* panel = new char[size * size];
 	Ball *panel ;
 	
 	void init() {
-		//inicializa el panel con un num_aleatorio de bolas que leido del estandar input
+		//inicializa el panel con un num_aleatorio de bolas 
+		//que leido del estandar input
+		std::cout << "Introduce el numero de bolas: \n";
+		std::cin >> size;
 	}
 	void insert(int position, Ball ball) {
 		//inserta la bola ball en el panel de bolas en la posicio indicada. 

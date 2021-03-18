@@ -1,14 +1,13 @@
 #pragma once
-#include <iostream>
 #include "Types.h"
 
 struct Player
 {
 	//var
 	std::string id;
-	int pos_x;
+	int posX, posY;
 	int score;
-	char *gun = new char[20];
+	char gun;
 
 	//pistola?
 
