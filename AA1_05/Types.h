@@ -1,16 +1,5 @@
 #pragma once
 #include<iostream>
 //colors
-struct Ball {
+enum Ball { BLUE, ORANGE, YELLOW, GREEN, RED, COUNT };
 
-	int position;
-
-	enum colorBall {
-		BLUE,
-		ORANGE,
-		YELLOW,
-		GREEN,
-		RED,
-		COUNT
-	};
-};
