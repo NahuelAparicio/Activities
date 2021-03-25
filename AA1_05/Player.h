@@ -1,29 +1,28 @@
-#pragma once
+//#pragma once
 #include "Types.h"
 #include "Constants.h"
+
 struct Player
 {
 	//var
-
-	int numBalls;
 	std::string id;
-	Ball ball;
 	int score;
 	int playerPos;
 
-	Ball* gunAmmo[];
+	Ball ball;
+	Ball* gunAmmo[]; //cargador
+
 
 	void init(std::string name, int position) {
 		id = name;
 		playerPos = position;
 		score = 0;
-		numBalls = MAXBALLS;
 
-
-		for (int i = 0; i < numBalls; i++)
+		//initialize the gunAmmo
+		for (int i = 0; i < MAXBALLS - 30; i++)
 		{
-			int temp = rand() % 5; // get a rand name to fill the array
-			switch (temp)
+			int tempType = rand() % 5; // get a rand name to fill the array
+			switch (tempType)
 			{
 			case 0:
 				gunAmmo[i] = new Ball(Ball::RED);
@@ -43,11 +42,10 @@ struct Player
 		//shoot 1 bola, la primera, la bola se elimina del cargador y la
 		//función la devuelve
 		
-		Ball myBallWas = gunAmmo[0];
+		Ball _firstball = *gunAmmo[0]; //get firstBall
 
-		delete[0]gunAmmo;
-
-		int* temp = new int[size];
+		delete[0]gunAmmo; //delete first ball
 		
+		return _firstball;		
 	}
 };
