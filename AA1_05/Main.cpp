@@ -41,7 +41,6 @@ int main(int argc, char** argv)
 
 	while (!input.Keyboard[(int)InputKey::ESCAPE])
 	{
-		system("cls");
 		//--INPUT
 		input.Update();
 
@@ -63,7 +62,8 @@ int main(int argc, char** argv)
 		{
 			fire = false;
 		}
-
+		system("cls");
+//limpiar estaba arriba
 		//--DRAW
 		theme = 1 % 255;
 		SetConsoleTextAttribute(hConsole, theme); // Set console "theme"
