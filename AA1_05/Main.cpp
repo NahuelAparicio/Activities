@@ -56,6 +56,7 @@ int main(int argc, char** argv)
 		if (input.Keyboard[(int)InputKey::FIRE] && !fire)
 		{
 			theme = (theme++) % 255; //Range between 0 and 254
+			player.shoot();
 			fire = true;
 		}
 		else if (!input.Keyboard[(int)InputKey::FIRE] && fire)
@@ -64,13 +65,15 @@ int main(int argc, char** argv)
 		}
 
 		//--DRAW
-
+		theme = 1 % 255;
 		SetConsoleTextAttribute(hConsole, theme); // Set console "theme"
 		std::cout << output;
 		panel.Draw(hConsole);
+		player.Draw(hConsole);
 
 	}
 }
+//para probar las funciones a mano
 void ClassicDebug()
 {
 	//debug

@@ -15,9 +15,9 @@ struct Panel
 		//inicializa el panel con un num_aleatorio de bolas 
 		//que leido del estandar input
 		int randNumBalls;
-		size = PANELSIZE;
 		std::cout << "Introduce el numero de bolas: \n";
 		std::cin >> randNumBalls;
+		size = randNumBalls;
 		
 		for (int i = 0; i < randNumBalls; i++)
 		{

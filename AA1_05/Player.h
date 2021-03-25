@@ -51,12 +51,14 @@ struct Player
 		}
 		std::cout << "\n";
 	}
-	void Draw()
+	void Draw(HANDLE hConsole)
 	{
 		std::cout << "Current ammo: " << currentAmmo << "\n";
 		for (int i = 0; i < currentAmmo; i++)
 		{
-			std::cout << (int)gunAmmo[i].color << "\n";
+				int color = (int)gunAmmo[i].GetColor() ;
+			SetConsoleTextAttribute(hConsole,color); // Set console "theme"
+			std::cout << 0 << "\n";
 		}
 		
 	}
