@@ -1,13 +1,15 @@
 //#pragma once
 #include "Types.h"
 #include "Constants.h"
-template <typename E>
+#include <stdio.h>
+
+
 
 
 struct Panel
 {
 	int size; //tamaño del panel
-	Ball *panel[];
+	Ball* panel = new Ball[1000];
 	
 	void init() {
 		//inicializa el panel con un num_aleatorio de bolas 
@@ -16,86 +18,104 @@ struct Panel
 		size = PANELSIZE;
 		std::cout << "Introduce el numero de bolas: \n";
 		std::cin >> randNumBalls;
-
+		
 		for (int i = 0; i < randNumBalls; i++)
 		{
-			int temp = rand() % 5;
-			switch (temp)
-			{
-			case 0:
-				panel[i] = new Ball(Ball::RED);
-			case 1:
-				panel[i] = new Ball(Ball::BLUE);
-			case 2:
-				panel[i] = new Ball(Ball::YELLOW);
-			case 3:
-				panel[i] = new Ball(Ball::ORANGE);
-			case 4:
-				panel[i] = new Ball(Ball::GREEN);
-			}
+			Ball newBall;
+			panel[i] =  newBall;
 		}
 	}
+	//funciona
 	void insert(int position, Ball ball) {
 		//inserta la bola ball en el panel de bolas en la posicio indicada. 
 		//la inserción la realiza desplazando a derecha las bolas
-		int* temp = new int[size + 1];
-		for (int i = 0; i < position - 1; i++)
-		{
-			temp[i] = panel[i];
-		}
-		for (int i = position; i < size; i++)
-		{
-			temp[i + 1] = panel[i];
-		}
-		temp[position] = ball;
+		Ball* tempList = new Ball[1000];
+		tempList[position] = ball;
 		size++;
-		delete[]panel;
-		panel = temp;
-		temp = nullptr;
-	}
+		int offset = 0;
+		for (int i = 0 ; i < size; i++) 
+		{
+			if (i == position)
+				offset++;
+			tempList[i + offset] = panel[i];
+		}
+		panel = tempList;
 
+	}
+	//funciona
 	int verifier(int position, Ball ball) {
 		//verify if there are 3 balls and point the first one.
-		if (panel[position] == panel[position + 1] == panel[position + 2]) return position;
-		else if (panel[position] == panel[position + 1] == panel[position - 1]) return position - 1;
-		else if (panel[position - 2] == panel[position - 1] == panel[position]) return position - 2;
-		else return 0;
-	}
+		BallType color = ball.color;
+		if ((panel[position].color == color) &&
+			(panel[position + 1].color == color) &&
+			(panel[position + 2].color == color))
+			return position;
+		else if ((panel[position].color == color) &&
+			(panel[position + 1].color == color) &&
+			(panel[position - 1].color == color))
+			return position - 1;
+		else if ((panel[position].color == color) &&
+			(panel[position - 1].color == color) &&
+			(panel[position - 2].color == color))
+			return position - 2;
+		else
+			return - 1;
+		
 
+	}
+	//funciona
 	void deleteThree(int position) {
 		//delete 3 balls 
-		delete[position]panel;
-		delete[position + 1]panel;
-		delete[position + 2]panel;
+
+		Ball* tempList = new Ball[1000];
+		size -= 3;
+		int offset = 0;
+		for (int i = 0; i < size; i++)
+		{
+			if (i == position)
+				offset = 3;
+			tempList[i] = panel[i + offset];
+		}
+		panel = tempList;
 	}
-
+	//funciona
 	void insertThree() {
-		//inserta 3 bolas random en el panel por el final
-		int* temp = new int[size];
 
-		//size == ultima posicion
-
-		Ball temp[3];
+		Ball* tempList = new Ball[1000];
+		
+		int offset = 0;
+		size += 3;
 		for (int i = 0; i < 3; i++)
 		{
-			int tempType = rand() % 5;
-			switch (tempType)
-			{
-			case 0:
-				temp = new Ball(Ball::RED);
-			case 1:
-				temp = new Ball(Ball::BLUE);
-			case 2:
-				temp = new Ball(Ball::YELLOW);
-			case 3:
-				temp = new Ball(Ball::ORANGE);
-			case 4:
-				temp = new Ball(Ball::GREEN);
-			}
+			Ball newBall;
+			tempList[i] = newBall;
 		}
-		panel[size] = temp[0];
-		panel[size - i] = temp[1];
-		panel[size - i] = temp[2];
+		for (int i = 0; i < size; i++)
+		{
+			tempList[i + 3] = panel[i];
+		}
+		panel = tempList;
+	}
+	//debug 
+	void PrintPanelBalls()
+	{
+		std::cout << "Panel Balls: " << size << "\n";
+		for (int i = 0; i < size; i++)
+		{
+			std::cout << (int)panel[i].color << "";
+		}
+		std::cout << "\n";
+	}
+	void Draw(HANDLE hConsole)
+	{
+		std::cout << "Panel Balls: " << size << "\n";
+		for (int i = 0; i < size; i++)
+		{
+			int color = (int)panel[i].GetColor() ;
+			SetConsoleTextAttribute(hConsole,color); // Set console "theme"
+			std::cout << 0 << "";
+		}
+		std::cout << "\n";
 	}
 };
 

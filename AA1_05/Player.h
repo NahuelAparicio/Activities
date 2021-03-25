@@ -1,6 +1,7 @@
 //#pragma once
 #include "Types.h"
 #include "Constants.h"
+#include <Windows.h>
 
 struct Player
 {
@@ -10,42 +11,53 @@ struct Player
 	int playerPos;
 
 	Ball ball;
-	Ball* gunAmmo[]; //cargador
+	Ball *gunAmmo = new Ball[MAXBALLS]; //cargador de 50
+	int currentAmmo = 0;
+	int initAmmo;
 
-
+	//funciona
 	void init(std::string name, int position) {
+		initAmmo = MAXBALLS - 30;
 		id = name;
 		playerPos = position;
 		score = 0;
 
 		//initialize the gunAmmo
-		for (int i = 0; i < MAXBALLS - 30; i++)
+		for (int i = 0; i < initAmmo; i++)
 		{
-			int tempType = rand() % 5; // get a rand name to fill the array
-			switch (tempType)
-			{
-			case 0:
-				gunAmmo[i] = new Ball(Ball::RED);
-			case 1:
-				gunAmmo[i] = new Ball(Ball::BLUE);
-			case 2:
-				gunAmmo[i] = new Ball(Ball::YELLOW);
-			case 3:
-				gunAmmo[i] = new Ball(Ball::ORANGE);
-			case 4:
-				gunAmmo[i] = new Ball(Ball::GREEN);
-			}
+			Ball newBall;
+			gunAmmo[i] = newBall;
 		}
+		currentAmmo = initAmmo;
 	}
+	//funciona
 	Ball shoot() {
 
 		//shoot 1 bola, la primera, la bola se elimina del cargador y la
 		//función la devuelve
-		
-		Ball _firstball = *gunAmmo[0]; //get firstBall
+		Ball _firstball = gunAmmo[currentAmmo - 1]; //get firstBall
 
-		delete[0]gunAmmo; //delete first ball
-		
+		//delete(&gunAmmo[currentAmmo - 1]); //delete first ball
+		currentAmmo--;
 		return _firstball;		
+	}
+	//funciona
+	void PrintBalls() 
+	{
+		std::cout <<"Current ammo: " << currentAmmo <<"\n";
+		for (int i = 0; i < currentAmmo; i++)
+		{
+			std::cout << (int)gunAmmo[i].color << "";
+		}
+		std::cout << "\n";
+	}
+	void Draw()
+	{
+		std::cout << "Current ammo: " << currentAmmo << "\n";
+		for (int i = 0; i < currentAmmo; i++)
+		{
+			std::cout << (int)gunAmmo[i].color << "\n";
+		}
+		
 	}
 };
