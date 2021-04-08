@@ -3,6 +3,7 @@
 #include <stdlib.h>
 //colors
 enum BallType { BLUE, AGUAMARINA, YELLOW, GREEN, RED, COUNT };
+
 struct Ball 
 {
 	BallType color = (BallType)(rand() % (int)(BallType::COUNT));

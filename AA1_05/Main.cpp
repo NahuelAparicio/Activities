@@ -6,10 +6,17 @@
 #include <iostream>
 #include "InputData.h"
 
-Player player;
-Panel panel;
 
+//Get from InputUser for panel constructor
+int getData() {
+	int randNumBalls;
+	std::cout << "Introduce el numero de bolas: \n";
+	std::cin >> randNumBalls;
+	return randNumBalls;
+}
 
+Player player("Jordi", 10);
+Panel panel(getData());
 
 //Print debug colors
 void printColors(HANDLE console)
@@ -23,17 +30,15 @@ void printColors(HANDLE console)
 	}
 }
 
+
 int main(int argc, char** argv)
 {
 	srand(time(NULL));
-	player.init("Jordi", 10);
-	panel.init();
 	
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	//-*-*- CONSOLE COLOR TEST -*-*-
 	//printColors(hConsole);
 	//system("pause");
-
 
 	InputData input; //Data structure that manages and stores all inputs that we want.
 	int theme = 1; // Actual console "theme" (appearance)
@@ -41,6 +46,7 @@ int main(int argc, char** argv)
 
 	while (!input.Keyboard[(int)InputKey::ESCAPE])
 	{
+		system("cls");
 		//--INPUT
 		input.Update();
 
@@ -55,22 +61,20 @@ int main(int argc, char** argv)
 		if (input.Keyboard[(int)InputKey::FIRE] && !fire)
 		{
 			theme = (theme++) % 255; //Range between 0 and 254
-			player.shoot();
 			fire = true;
+			panel.insert(0, player.shoot()); //HGOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 		}
 		else if (!input.Keyboard[(int)InputKey::FIRE] && fire)
 		{
 			fire = false;
 		}
-		system("cls");
-//limpiar estaba arriba
 		//--DRAW
 		theme = 1 % 255;
 		SetConsoleTextAttribute(hConsole, theme); // Set console "theme"
 		std::cout << output;
 		panel.Draw(hConsole);
 		player.Draw(hConsole);
-
+	
 	}
 }
 //para probar las funciones a mano
