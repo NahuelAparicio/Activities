@@ -30,7 +30,23 @@ void printColors(HANDLE console)
 	}
 }
 
+int getPos() {
+	int n;
+	std::cout << "Position: " << "\n";
+	std::cin >> n;
+	return n;
+}
 
+void getChekerForVerify() {
+	int n, color;
+	Ball newBall;
+	std::cout << "Check 3 ball same color in : " << "\n";
+	std::cin >> n;
+	std::cout << "with color(number) : " << "\n";
+	std::cin >> color;
+	newBall.color = (BallType)color;
+	std::cout << "Comprobacion: " << panel.verifier(n - 1, newBall) << "\n";
+}
 int main(int argc, char** argv)
 {
 	srand(time(NULL));
@@ -43,6 +59,8 @@ int main(int argc, char** argv)
 	InputData input; //Data structure that manages and stores all inputs that we want.
 	int theme = 1; // Actual console "theme" (appearance)
 	bool fire = false; //Fire flag to check fire key
+	bool inst = false;
+	bool right = false;
 
 	while (!input.Keyboard[(int)InputKey::ESCAPE])
 	{
@@ -62,12 +80,32 @@ int main(int argc, char** argv)
 		{
 			theme = (theme++) % 255; //Range between 0 and 254
 			fire = true;
-			panel.insert(0, player.shoot()); //HGOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			panel.insert(getPos() - 1, player.shoot()); //HGOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			
 		}
 		else if (!input.Keyboard[(int)InputKey::FIRE] && fire)
 		{
 			fire = false;
 		}
+
+		if (input.Keyboard[(int)InputKey::UP] && !inst) {
+			inst = true;
+			std::cout << "add 3 balls at the end: " << "\n";
+			panel.insertThree();
+		}
+		else if (!input.Keyboard[(int)InputKey::UP] && inst)
+		{
+			inst = false;
+		}
+		if (input.Keyboard[(int)InputKey::RIGHT] && !right) {
+			right = true;
+			getChekerForVerify();
+		}
+		else if (!input.Keyboard[(int)InputKey::RIGHT] && right)
+		{
+			right = false;
+		}
+
 		//--DRAW
 		theme = 1 % 255;
 		SetConsoleTextAttribute(hConsole, theme); // Set console "theme"

@@ -8,14 +8,13 @@ class Panel {
 
 private:
 	int size;
-	//Ball* panel = new Ball[1000];
 	std::vector<Ball> panel;
 
 public:
 
 	Panel(int randBalls) {
 		size = randBalls;
-		panel.resize(1000);
+		panel.resize(size);
 		for (int i = 0; i < randBalls; i++)
 		{
 			Ball newBall;
@@ -25,26 +24,10 @@ public:
 
 	//funciona
 	void insert(int position, Ball ball) {
-		//Ball* tempList = new Ball[1000]; PRE VECTOR
-		//std::vector<Ball> tempList;
-		//tempList.resize(1000);
-
-		//panel.push_back(ball);
-
-		panel.insert(panel.begin() + 1, ball);
-
-		/*
-		tempList[position] = ball;
 		size++;
-		int offset = 0;
-		for (int i = 0; i < size; i++)
-		{
-			if (i == position)
-				offset++;
-			tempList[i + offset] = panel[i];
-		}
-		panel = tempList;*/
+		panel.insert(panel.begin() + position, ball);
 	}
+
 	//funciona
 	int verifier(int position, Ball ball) {
 		//verify if there are 3 balls and point the first one.
@@ -64,7 +47,7 @@ public:
 		else
 			return -1;
 	}
-	//funciona
+	//no funciona
 	void deleteThree(int position) {
 		//delete 3 balls
 		//Ball* tempList = new Ball[size -3]; PREVECTOR
@@ -89,23 +72,10 @@ public:
 	}
 	//funciona
 	void insertThree() {
-
-		//Ball* tempList = new Ball[1000]; PREVECTOR
-
-		std::vector<Ball> tempList;
-		tempList.resize(1000);
-		int offset = 0;
 		size += 3;
-		for (int i = 0; i < 3; i++)
-		{
-			Ball newBall;
-			tempList[i] = newBall;
-		}
-		for (int i = 0; i < size; i++)
-		{
-			tempList[i + 3] = panel[i];
-		}
-		panel = tempList;
+		Ball newBall;
+		panel.insert(panel.end(), 3, newBall);
+
 	}
 	//debug 
 	void PrintPanelBalls()
